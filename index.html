@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
-    <title>GUI test</title>
+    <title>PWA test</title>
     <link rel="manifest" href="manifest.json">
     <script src="babylonjs_js/babylon.js"></script>
     <script src="babylonjs_js/babylonjs.loaders.min.js"></script>
@@ -30,6 +30,12 @@
 <body>
     <canvas id="renderCanvas"></canvas>
  <!--Teleportation check-->
+<script>
+if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./js/service-worker.js').then(function() { console.log('Service Worker Registered'); });
+   }
+
+</script>
 <script src="./js/TeleportCheck.js"></script>
 
 
