@@ -1,0 +1,20 @@
+{
+    "short_name": "quest_standalone",
+  
+  
+    "name": "Simple example for Oculus Quest PWA app",
+    "icons": [{
+        "src": "icons/icon-256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+      },{
+        "src": "icons/icon-192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }],
+  
+    "start_url": "https://flushpot1125.github.io/bjs_pwa_example/.",
+  
+  
+    "display": "standalone"
+  }
