@@ -27,7 +27,7 @@ var createScene = function () {
     panel.addControl(header); 
 
    var museumMesh;
-   BABYLON.SceneLoader.ImportMeshAsync("", "../model/", "museum.glb", scene).then(function(result) {
+   BABYLON.SceneLoader.ImportMeshAsync("", "model/", "museum.glb", scene).then(function(result) {
      //  result.meshes[1].scaling= new BABYLON.Vector3(0.15, 0.15, 0.15);
     // museumMesh = result.meshes[0];
     
