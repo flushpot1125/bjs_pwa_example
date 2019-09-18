@@ -2,8 +2,8 @@ var canvas = document.getElementById("renderCanvas");
 
 var createScene = function () {
     var scene = new BABYLON.Scene(engine);
-    scene.debugLayer.show();
-   // scene.debugLayer.show();
+  //  scene.debugLayer.show();
+
     var camera = new BABYLON.ArcRotateCamera('MainCamera1', 0, 0, 3, BABYLON.Vector3(0, 1.2, 0), scene, true);
     camera.position = new BABYLON.Vector3(0, 1.2, -1.1); //3,-1.8,5
   //  camera.position = new BABYLON.Vector3(3, -1.8, 5);
