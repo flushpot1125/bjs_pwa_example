@@ -13,7 +13,7 @@
         "type": "image/png"
       }],
   
-    "start_url": "https://flushpot1125.github.io/bjs_pwa_example/.",
+    "start_url": "./?utm_source=homescreen",
   
   
     "display": "standalone"
