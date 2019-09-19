@@ -14,11 +14,13 @@ const STATIC_DATA = [
 ];
 self.addEventListener('install', function(e) {
     console.log('[ServiceWorker] Install');
+    /*
     e.waitUntil(
       caches.open('cache_v1').then(function(cache) {
         return cache.addAll(STATIC_DATA);
       })
     );
+    */
   });
   
   self.addEventListener('activate', function(e) {
