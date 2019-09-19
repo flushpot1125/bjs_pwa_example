@@ -4,7 +4,12 @@
 const STATIC_DATA = [
   'index.html',
   'model/museum.glb',
+  'babylonjs_js/babylon.js',
+  'babylonjs_js/babylonjs.loaders.min.js',
   'babylonjs_js/babylonjs.material.min.js',
+  'babylonjs_js/babylon.gui.min.js',
+  'babylonjs_js/babylon.inspector.bundle.js',
+  'babylonjs_js/pep.js',
   'js/TeleportCheck.js'
 ];
 self.addEventListener('install', function(e) {
