@@ -18,8 +18,9 @@ self.addEventListener('install', e => {
 
     e.waitUntil(
       caches.open('cache_v1').then(cache => {
-        return cache.addAll(STATIC_DATA)
-        .then(()=> self.skipWaiting());
+        return cache.addAll(urlsToCache.map(url => new Request(url, {credentials: 'same-origin'})));
+      //  return cache.addAll(STATIC_DATA)
+      //  .then(()=> self.skipWaiting());
       })
     );
 
