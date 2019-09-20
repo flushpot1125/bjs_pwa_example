@@ -13,14 +13,16 @@ const STATIC_DATA = [
   '/babylonjs_js/pep.js',
   '/js/TeleportCheck.js'
 ];
+
 const cacheName ='cache_v1';
+
 self.addEventListener('install', e => {
     console.log('[ServiceWorker] Install');
 
     e.waitUntil(
       caches.open(cacheName).then(cache => {
-        return cache.addAll(STATIC_DATA.map(url => new Request(url, {credentials: 'same-origin'})));
-      //  return cache.addAll(STATIC_DATA)
+      //  return cache.addAll(STATIC_DATA.map(url => new Request(url, {credentials: 'same-origin'})));
+        return cache.addAll(STATIC_DATA)
       //  .then(()=> self.skipWaiting());
       })
     );
@@ -30,19 +32,49 @@ self.addEventListener('install', e => {
   self.addEventListener('activate', e => {
     console.log('[ServiceWorker] Activate');
     e.waitUntil(self.clients.claim());
-    
   });
-  
+
+
+
+  self.addEventListener('fetch', e => {
+    // 外部リソース取得時
+    console.log('fetch', e.request.url);
+    e.respondWith(
+      caches.match(e.request, {
+        ignoreSearch:true
+      })
+      .then(response => {
+        return response || fetch(e.request);
+      })
+    );
+  });
+
+
   self.addEventListener('fetch', e=> {
-    console.log(e.request.url);
+    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin'){
+      console.log("not same origin");
+      return;
+    }
+    
+    e.respondWith(
+      caches.match(e.request, {
+        ignoreSearch:true
+      })
+      .then(response => {
+        return response || fetch(e.request);
+      })
+    );
+  //  console.log(e.request.url);
+  /*
     e.respondWith(
       caches.open(cacheName)
       .then(cache => cache.match(e.request, {ignoreSearch: true}))
       .then(response => {
       return response || fetch(e.request);
     })
+    */
      // caches.match(event.request).then(function(response) {
      //   return response || fetch(event.request);
      // })
-    );
+   // );
   });
