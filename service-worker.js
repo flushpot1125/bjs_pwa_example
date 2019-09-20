@@ -13,11 +13,12 @@ const STATIC_DATA = [
   '/babylonjs_js/pep.js',
   '/js/TeleportCheck.js'
 ];
+const cacheName ='cache_v1';
 self.addEventListener('install', e => {
     console.log('[ServiceWorker] Install');
 
     e.waitUntil(
-      caches.open('cache_v1').then(cache => {
+      caches.open(cacheName).then(cache => {
         return cache.addAll(STATIC_DATA.map(url => new Request(url, {credentials: 'same-origin'})));
       //  return cache.addAll(STATIC_DATA)
       //  .then(()=> self.skipWaiting());
