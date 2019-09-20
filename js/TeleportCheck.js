@@ -42,8 +42,8 @@ var createScene = function () {
     rightHand.isVisible =false;
 
     // Default Environment
-    var environment = scene.createDefaultEnvironment({ enableGroundShadow: false, groundYBias: 1 });
-    environment.setMainColor(BABYLON.Color3.FromHexString("#74b9ff"))
+  //  var environment = scene.createDefaultEnvironment({ enableGroundShadow: false, groundYBias: 1 });
+  //  environment.setMainColor(BABYLON.Color3.FromHexString("#74b9ff"))
     
     return scene;
 };
