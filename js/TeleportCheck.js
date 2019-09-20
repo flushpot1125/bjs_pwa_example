@@ -23,9 +23,9 @@ var createScene = function () {
     sphere.material = mat;
 
    
-   //BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
+   BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
 
-  // });
+   });
 
     var vrHelper = scene.createDefaultVRExperience();
     vrHelper.enableTeleportation({

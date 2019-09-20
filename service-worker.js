@@ -4,7 +4,7 @@
 const STATIC_DATA = [
   '/',
   '/index.html',
-//  '/model/museum.glb',
+  '/model/museum.glb',
   '/babylonjs_js/babylon.js',
   '/babylonjs_js/babylonjs.loaders.min.js',
   '/babylonjs_js/babylonjs.material.min.js',
