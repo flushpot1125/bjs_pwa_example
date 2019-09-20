@@ -23,7 +23,7 @@ self.addEventListener('install', e => {
       caches.open(cacheName).then(cache => {
       //  return cache.addAll(STATIC_DATA.map(url => new Request(url, {credentials: 'same-origin'})));
         return cache.addAll(STATIC_DATA)
-      //  .then(()=> self.skipWaiting());
+        .then(()=> self.skipWaiting());
       })
     );
 
@@ -35,32 +35,16 @@ self.addEventListener('install', e => {
   });
 
 
-
-  self.addEventListener('fetch', e => {
-    // 外部リソース取得時
-    console.log('fetch', e.request.url);
-    e.respondWith(
-      caches.match(e.request, {
-        ignoreSearch:true
-      })
-      .then(response => {
-        return response || fetch(e.request);
-      })
-    );
-  });
-
-
   self.addEventListener('fetch', e=> {
-    if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin'){
+    if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
       console.log("not same origin");
       return;
     }
-    
+    console.log('[ServiceWorker] Fetched resources');
     e.respondWith(
-      caches.match(e.request, {
-        ignoreSearch:true
-      })
-      .then(response => {
+      caches.open(cacheName)
+        .then(cache => cache.match(e.request, {ignoreSearch: true}))
+        .then(response => {
         return response || fetch(e.request);
       })
     );
