@@ -1,6 +1,3 @@
-//Ref:https://qiita.com/umamichi/items/0e2b4b1c578e7335ba20
-
-//Ref:https://qiita.com/masanarih0ri/items/0845f312cff5c8d0ec60
 const STATIC_DATA = [
   '/',
   '/index.html',
@@ -18,47 +15,31 @@ const cacheName ='cache_v1';
 
 self.addEventListener('install', e => {
     console.log('[ServiceWorker] Install');
-
     e.waitUntil(
       caches.open(cacheName).then(cache => {
-      //  return cache.addAll(STATIC_DATA.map(url => new Request(url, {credentials: 'same-origin'})));
         return cache.addAll(STATIC_DATA)
         .then(()=> self.skipWaiting());
       })
     );
-
-  });
+});
   
-  self.addEventListener('activate', e => {
-    console.log('[ServiceWorker] Activate');
-    e.waitUntil(self.clients.claim());
-  });
+self.addEventListener('activate', e => {
+  console.log('[ServiceWorker] Activate');
+  e.waitUntil(self.clients.claim());
+});
 
 
-  self.addEventListener('fetch', e=> {
-    if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
-      console.log("not same origin");
-      return;
-    }
-    console.log('[ServiceWorker] Fetched resources');
-    e.respondWith(
-      caches.open(cacheName)
-        .then(cache => cache.match(e.request, {ignoreSearch: true}))
-        .then(response => {
-        return response || fetch(e.request);
-      })
-    );
-  //  console.log(e.request.url);
-  /*
-    e.respondWith(
-      caches.open(cacheName)
+self.addEventListener('fetch', e=> {
+  if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
+    console.log("not same origin");
+    return;
+  }
+  console.log('[ServiceWorker] Fetched resources');
+  e.respondWith(
+    caches.open(cacheName)
       .then(cache => cache.match(e.request, {ignoreSearch: true}))
       .then(response => {
       return response || fetch(e.request);
     })
-    */
-     // caches.match(event.request).then(function(response) {
-     //   return response || fetch(event.request);
-     // })
-   // );
-  });
+  );
+});
