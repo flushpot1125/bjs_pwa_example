@@ -48,7 +48,10 @@ self.addEventListener('fetch', e=> {
 
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", function (event) {
-  if (event.request.method !== "GET") return;
+  if (event.request.method !== "GET"){
+    console.error("event.request.method is not GET");
+    return;
+  } 
 
   event.respondWith(
     fetch(event.request).catch(function (error) {
@@ -67,6 +70,8 @@ self.addEventListener("fetch", function (event) {
     })
   );
 });
+
+
 
 // This is an event that can be fired from your page to tell the SW to update the offline page
 self.addEventListener("refreshOffline", function () {
