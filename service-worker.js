@@ -49,7 +49,7 @@ self.addEventListener('fetch', e=> {
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET"){
-    console.error("event.request.method is not GET");
+    console.log("event.request.method is not GET");
     return;
   } 
 
@@ -60,11 +60,11 @@ self.addEventListener("fetch", function (event) {
         event.request.destination !== "document" ||
         event.request.mode !== "navigate"
       ) {
-        console.error("request mode is not navigate or destination is not document");
+        console.log("request mode is not navigate or destination is not document");
         return;
       }
 
-      console.error("[PWA Builder] Network request Failed. Serving offline page " + error);
+      console.log("[PWA Builder] Network request Failed. Serving offline page " + error);
       return caches.open(cacheName).then(function (cache) {
         return cache.match(STATIC_DATA);
       });
