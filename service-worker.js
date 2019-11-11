@@ -28,7 +28,7 @@ self.addEventListener('activate', e => {
   e.waitUntil(self.clients.claim());
 });
 
-
+/*
 self.addEventListener('fetch', e=> {
   if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
     console.log("not same origin");
@@ -42,4 +42,40 @@ self.addEventListener('fetch', e=> {
       return response || fetch(e.request);
     })
   );
+});
+*/
+//
+
+// If any fetch fails, it will show the offline page.
+self.addEventListener("fetch", function (event) {
+  if (event.request.method !== "GET") return;
+
+  event.respondWith(
+    fetch(event.request).catch(function (error) {
+      // The following validates that the request was for a navigation to a new document
+      if (
+        event.request.destination !== "document" ||
+        event.request.mode !== "navigate"
+      ) {
+        return;
+      }
+
+      console.error("[PWA Builder] Network request Failed. Serving offline page " + error);
+      return caches.open(cacheName).then(function (cache) {
+        return cache.match(STATIC_DATA);
+      });
+    })
+  );
+});
+
+// This is an event that can be fired from your page to tell the SW to update the offline page
+self.addEventListener("refreshOffline", function () {
+  const offlinePageRequest = new Request(STATIC_DATA);
+
+  return fetch(STATIC_DATA).then(function (response) {
+    return caches.open(cacheName).then(function (cache) {
+      console.log("[PWA Builder] Offline page updated from refreshOffline event: " + response.url);
+      return cache.put(offlinePageRequest, response);
+    });
+  });
 });
