@@ -60,6 +60,7 @@ self.addEventListener("fetch", function (event) {
         event.request.destination !== "document" ||
         event.request.mode !== "navigate"
       ) {
+        console.error("request mode is not navigate or destination is not document");
         return;
       }
 
