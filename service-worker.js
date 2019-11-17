@@ -56,6 +56,7 @@ self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request).catch(function (error) {
       // The following validates that the request was for a navigation to a new document
+     /*
       if (
         event.request.destination !== "document" ||
         event.request.mode !== "navigate"
@@ -64,6 +65,7 @@ self.addEventListener("fetch", function (event) {
         console.log("request mode is not navigate or destination is not document");
         return;
       }
+      */
 
       console.log("[PWA Builder] Network request Failed. Serving offline page " + error);
       return caches.open(cacheName).then(function (cache) {
