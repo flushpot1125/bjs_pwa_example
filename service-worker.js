@@ -30,10 +30,44 @@ self.addEventListener('activate', e => {
 
 /*
 self.addEventListener('fetch', e=> {
+  
   if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
     console.log("not same origin");
     return;
   }
+  
+  console.log('[ServiceWorker] Fetched resources');
+  e.respondWith(
+    caches.open(cacheName)
+      .then(cache => cache.match(e.request, {ignoreSearch: true}))
+      .then(response => {
+      return response || fetch(e.request);
+    })
+  );
+});
+*/
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((r) => {
+          console.log('[Service Worker] Fetching resource: '+e.request.url);
+      return r || fetch(e.request).then((response) => {
+                return caches.open(cacheName).then((cache) => {
+          console.log('[Service Worker] Caching new resource: '+e.request.url);
+          cache.put(e.request, response.clone());
+          return response;
+        });
+      });
+    })
+  );
+});
+/*
+self.addEventListener('fetch', e=> {
+  
+  if (e.request.cache === 'only-if-cached' && e.request.mode !== 'same-origin'){
+    console.log("not same origin");
+    return;
+  }
+  
   console.log('[ServiceWorker] Fetched resources');
   e.respondWith(
     caches.open(cacheName)
@@ -46,6 +80,7 @@ self.addEventListener('fetch', e=> {
 */
 //
 
+/*
 // If any fetch fails, it will show the offline page.
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET"){
@@ -56,7 +91,7 @@ self.addEventListener("fetch", function (event) {
   event.respondWith(
     fetch(event.request).catch(function (error) {
       // The following validates that the request was for a navigation to a new document
-     /*
+     
       if (
         event.request.destination !== "document" ||
         event.request.mode !== "navigate"
@@ -65,7 +100,7 @@ self.addEventListener("fetch", function (event) {
         console.log("request mode is not navigate or destination is not document");
         return;
       }
-      */
+      
 
       console.log("[PWA Builder] Network request Failed. Serving offline page " + error);
       return caches.open(cacheName).then(function (cache) {
@@ -74,17 +109,5 @@ self.addEventListener("fetch", function (event) {
     })
   );
 });
+*/
 
-
-
-// This is an event that can be fired from your page to tell the SW to update the offline page
-self.addEventListener("refreshOffline", function () {
-  const offlinePageRequest = new Request(STATIC_DATA);
-
-  return fetch(STATIC_DATA).then(function (response) {
-    return caches.open(cacheName).then(function (cache) {
-      console.log("[PWA Builder] Offline page updated from refreshOffline event: " + response.url);
-      return cache.put(offlinePageRequest, response);
-    });
-  });
-});
