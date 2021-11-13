@@ -32,6 +32,11 @@ var createScene = async function () {
 
     scene.createDefaultEnvironment();
 
+    BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
+
+    });
+ 
+
     // XR
     const xrHelper = await scene.createDefaultXRExperienceAsync();
 
