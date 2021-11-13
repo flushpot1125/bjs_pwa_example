@@ -18,7 +18,7 @@ var createScene = async function () {
    });
 
    const xrHelper = await scene.createDefaultXRExperienceAsync({
-    floorMeshes: [environment.ground]
+   // floorMeshes: [environment.ground]
     });
 
 
