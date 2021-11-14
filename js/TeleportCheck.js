@@ -33,7 +33,7 @@ var createScene = async function () {
     const floor =[];
     var assetsManager = new BABYLON.AssetsManager(scene);
     assetsManager.onFinish = function (tasks) {
-         for (var i=0;i<5;i++){
+         for (var i=0;i<6;i++){
             floor[i] = scene.getMeshByName("floor_primitive"+i);
             experience.teleportation.addFloorMesh(floor[i]);
         }
@@ -42,7 +42,7 @@ var createScene = async function () {
 
 //    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
 
-    var meshTask = assetsManager.addMeshTask("museum", "floor_primitive0", "./model/", "museum.glb");
+    var meshTask = assetsManager.addMeshTask("museum", "group1000031235", "./model/", "museum.glb");
     assetsManager.load();
 
    // BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
