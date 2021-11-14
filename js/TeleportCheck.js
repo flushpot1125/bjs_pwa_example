@@ -33,12 +33,15 @@ var createScene = async function () {
 
     });
 
-    var floor;
+    const floor =[];
 
     scene.onBeforeRenderObservable.add(() => {
-        if (scene.getMeshByName("floor")) {
-            floor = scene.getMeshByName("floor");
-        }
+            for (var i=0;i<5;i++){
+                floor[i] = scene.getMeshByName("floor_primitive"+i);
+                console.log(floor[i].name);
+            }
+            
+        
     })
 
 
@@ -48,7 +51,9 @@ var createScene = async function () {
     // floorMeshes: [environment.ground]
     });
 
-    experience.teleportation.addFloorMesh(floor);
+    for (var i=0;i<5;i++){
+        experience.teleportation.addFloorMesh(floor[i]);
+    }
 
     return scene;
 
