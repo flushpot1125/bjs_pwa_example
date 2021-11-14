@@ -8,6 +8,10 @@ var createScene = async function () {
 
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
+    var experience = await scene.createDefaultXRExperienceAsync({
+        // define the floor meshes
+    // floorMeshes: [environment.ground]
+    });
 
     // This creates and positions a free camera (non-mesh)
 //    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 9, -10), scene);
@@ -32,10 +36,7 @@ var createScene = async function () {
          for (var i=0;i<5;i++){
             floor[i] = scene.getMeshByName("floor_primitive"+i);
         }
-        var experience = await scene.createDefaultXRExperienceAsync({
-            // define the floor meshes
-            floorMeshes: [floor[0], floor[1], floor[2], floor[3], floor[4]]
-        });
+        experience.teleportation.addFloorMesh(floor_primitive0);
     };
 
 //    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
@@ -63,10 +64,7 @@ var createScene = async function () {
 */
 
 
-  //  var experience = await scene.createDefaultXRExperienceAsync({
-        // define the floor meshes
-    // floorMeshes: [environment.ground]
-  //  });
+
 
     //for (var i=0;i<5;i++){
      //   experience.teleportation.addFloorMesh(floor[i]);
