@@ -34,12 +34,15 @@ var createScene = async function () {
     });
 
     const floor =[];
+    var floor_primitive0;
+    var floor_primitive1;
+
 
     scene.onBeforeRenderObservable.add(() => {
-            for (var i=0;i<5;i++){
-                floor[i] = scene.getMeshByName("floor_primitive"+i);
-                console.log(floor[i].name);
-            }
+           // for (var i=0;i<5;i++){
+            floor_primitive0 = scene.getMeshByName("floor_primitive0");
+                console.log(floor_primitive0);
+           // }
             
         
     })
@@ -51,9 +54,12 @@ var createScene = async function () {
     // floorMeshes: [environment.ground]
     });
 
-    for (var i=0;i<5;i++){
-        experience.teleportation.addFloorMesh(floor[i]);
-    }
+    //for (var i=0;i<5;i++){
+     //   experience.teleportation.addFloorMesh(floor[i]);
+    //}
+
+    experience.teleportation.addFloorMesh(floor_primitive0);
+    experience.teleportation.addFloorMesh(floor_primitive1);
 
     return scene;
 
