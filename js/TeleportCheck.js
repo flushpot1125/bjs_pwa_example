@@ -45,7 +45,7 @@ var createScene = async function () {
 
     var experience = await scene.createDefaultXRExperienceAsync({
         // define the floor meshes
-        floorMeshes: [environment.ground]
+    // floorMeshes: [environment.ground]
     });
 
     experience.teleportation.addFloorMesh(floor);
