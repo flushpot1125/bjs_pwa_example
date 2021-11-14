@@ -8,14 +8,10 @@ var createScene = async function () {
 
     // This creates a basic Babylon Scene object (non-mesh)
     var scene = new BABYLON.Scene(engine);
-    scene.debugLayer.show();
+    scene.debugLayer.show();// It is no matter even if the code is not included.
     var experience = await scene.createDefaultXRExperienceAsync({
-        // define the floor meshes
-    // floorMeshes: [environment.ground]
     });
 
-    // This creates and positions a free camera (non-mesh)
-//    var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 9, -10), scene);
     var camera = new BABYLON.ArcRotateCamera('MainCamera1', 0, 0, 3, BABYLON.Vector3(0, 1.2, 0), scene, true);
     camera.position = new BABYLON.Vector3(0, 1.2, -1.1); 
 
@@ -41,39 +37,9 @@ var createScene = async function () {
        
     };
 
-//    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
 
     var meshTask = assetsManager.addMeshTask("museum", "", "./model/", "museum.glb");
     assetsManager.load();
-
-   // BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
-
-    //});
-
-    //const floor =[];
-    //var floor_primitive0;
-    //var floor_primitive1;
-
-/*
-    scene.onBeforeRenderObservable.add(() => {
-           // for (var i=0;i<5;i++){
-            floor_primitive0 = scene.getMeshByName("floor_primitive0");
-             //   console.log(floor_primitive0);
-           // }
-            
-        
-    })
-*/
-
-
-
-
-    //for (var i=0;i<5;i++){
-     //   experience.teleportation.addFloorMesh(floor[i]);
-    //}
-
- //   experience.teleportation.addFloorMesh(floor_primitive0);
- //   experience.teleportation.addFloorMesh(floor_primitive1);
 
     return scene;
 
