@@ -42,7 +42,7 @@ var createScene = async function () {
 
 //    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
 
-    var meshTask = assetsManager.addMeshTask("museum", "museum.glb", "./model/", "museum.glb");
+    var meshTask = assetsManager.addMeshTask("museum", "", "./model/", "museum.glb");
     assetsManager.load();
 
    // BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
