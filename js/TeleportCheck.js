@@ -26,40 +26,54 @@ var createScene = async function () {
     // Default intensity is 1. Let's dim the light a small amount
     light.intensity = 0.7;
 
-
-    //scene.createDefaultEnvironment();
-
-    BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
-
-    });
-
     const floor =[];
-    var floor_primitive0;
-    var floor_primitive1;
+    var assetsManager = new BABYLON.AssetsManager(scene);
+    assetsManager.onFinish = function (tasks) {
+         for (var i=0;i<5;i++){
+            floor[i] = scene.getMeshByName("floor_primitive"+i);
+        }
+        var experience = await scene.createDefaultXRExperienceAsync({
+            // define the floor meshes
+            floorMeshes: [floor[0], floor[1], floor[2], floor[3], floor[4]]
+        });
+    };
 
+//    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
 
+    var meshTask = assetsManager.addMeshTask("museum", "floor_primitive0", "./model/", "museum.glb");
+    assetsManager.load();
+
+   // BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
+
+    //});
+
+    //const floor =[];
+    //var floor_primitive0;
+    //var floor_primitive1;
+
+/*
     scene.onBeforeRenderObservable.add(() => {
            // for (var i=0;i<5;i++){
             floor_primitive0 = scene.getMeshByName("floor_primitive0");
-                console.log(floor_primitive0);
+             //   console.log(floor_primitive0);
            // }
             
         
     })
+*/
 
 
-
-    var experience = await scene.createDefaultXRExperienceAsync({
+  //  var experience = await scene.createDefaultXRExperienceAsync({
         // define the floor meshes
     // floorMeshes: [environment.ground]
-    });
+  //  });
 
     //for (var i=0;i<5;i++){
      //   experience.teleportation.addFloorMesh(floor[i]);
     //}
 
-    experience.teleportation.addFloorMesh(floor_primitive0);
-    experience.teleportation.addFloorMesh(floor_primitive1);
+ //   experience.teleportation.addFloorMesh(floor_primitive0);
+ //   experience.teleportation.addFloorMesh(floor_primitive1);
 
     return scene;
 
