@@ -35,8 +35,9 @@ var createScene = async function () {
     assetsManager.onFinish = function (tasks) {
          for (var i=0;i<5;i++){
             floor[i] = scene.getMeshByName("floor_primitive"+i);
+            experience.teleportation.addFloorMesh(floor[i]);
         }
-        experience.teleportation.addFloorMesh(floor_primitive0);
+       
     };
 
 //    LoadEntity("logo", "BJS-3D-logo_light.000", "scenes/", "babylonJS_logo_v3.babylon", assetsManager, myMesh, 0);
