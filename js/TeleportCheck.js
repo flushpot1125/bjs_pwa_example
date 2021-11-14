@@ -27,7 +27,7 @@ var createScene = async function () {
     light.intensity = 0.7;
 
 
-    scene.createDefaultEnvironment();
+    //scene.createDefaultEnvironment();
 
     BABYLON.SceneLoader.ImportMeshAsync("", "./model/", "museum.glb", scene).then(function(result) {
 
