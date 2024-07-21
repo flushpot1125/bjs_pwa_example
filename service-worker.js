@@ -2,6 +2,7 @@ const STATIC_DATA = [
   
   'index.html',
   'model/museum.glb',
+  'model/3dscanned_church.glb',
   'babylonjs_js/babylon.js',
   'babylonjs_js/babylonjs.loaders.min.js',
   'babylonjs_js/babylonjs.material.min.js',

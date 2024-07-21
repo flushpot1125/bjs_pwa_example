@@ -41,6 +41,10 @@ var createScene = async function () {
     var meshTask = assetsManager.addMeshTask("museum", "", "./model/", "museum.glb");
     assetsManager.load();
 
+    var assetsManager2 = new BABYLON.AssetsManager(scene);
+    var meshTask2 = assetsManager2.addMeshTask("church", "", "./model/", "3dscanned_church.glb");
+    assetsManager2.load();
+
     return scene;
 
 };
